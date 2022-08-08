@@ -1,6 +1,8 @@
 import 'dart:async';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
+import 'package:techblog_danivar/consts/colors.dart';
+import 'package:techblog_danivar/gen/assets.gen.dart';
 import 'package:techblog_danivar/screens/homescreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,19 +24,37 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: Center(
-        child: Image.asset('assets/images/logo_splash.png', width: 200),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image: AssetImage(Assets.images.logo.path),
+              width: 200,
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            const SpinKitFadingCube(
+              color: SolidColors.primeryColor,
+              size: 32.0,
+            )
+          ],
+        ),
       ),
     );
   }
 
   void getData() {
-    Timer(const Duration(seconds: 3), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ),
-      );
-    });
+    Timer(
+      const Duration(seconds: 3),
+      () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      },
+    );
   }
 }
