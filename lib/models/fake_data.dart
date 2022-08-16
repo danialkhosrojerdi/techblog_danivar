@@ -20,6 +20,8 @@ List<HashtagModel> hashtagsList = [
   HashtagModel(title: 'اینترنت اشیاء'),
 ];
 
+List<HashtagModel> myFavCats = [];
+
 List<BlogModel> blogList = [
   BlogModel(
       id: 1,

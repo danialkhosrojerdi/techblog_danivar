@@ -12,7 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var selectedIndex = 0;
+  var selectedPageIndex = 0;
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +21,62 @@ class _HomeScreenState extends State<HomeScreen> {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width / 20;
 
-    List<Widget> techMainScreenPages = [
-      BlogScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-      ProfileScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin)
-    ];
-
     return Scaffold(
+      key: _key,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Image.asset(
+                Assets.images.logo.path,
+                scale: 3,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'پروفایل کاربری',
+                style: textTheme.headline4,
+              ),
+              onTap: () {},
+            ),
+            const Divider(
+              color: SolidColors.dividerColor,
+            ),
+            ListTile(
+              title: Text(
+                'درباره تک بلاگ',
+                style: textTheme.headline4,
+              ),
+              onTap: () {},
+            ),
+            const Divider(
+              color: SolidColors.dividerColor,
+            ),
+            ListTile(
+              title: Text(
+                'اشتراک گذاری تک بلاگ',
+                style: textTheme.headline4,
+              ),
+              onTap: () {},
+            ),
+            const Divider(
+              color: SolidColors.dividerColor,
+            ),
+            ListTile(
+              title: Text(
+                'تک بلاگ در گیت‌هاب',
+                style: textTheme.headline4,
+              ),
+              onTap: () {},
+            ),
+            const Divider(
+              color: SolidColors.dividerColor,
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: SolidColors.scafoldBg,
         title: Padding(
@@ -34,9 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Icon(
-                Icons.menu,
-                color: Colors.grey,
+              IconButton(
+                onPressed: () {
+                  _key.currentState!.openDrawer();
+                },
+                icon: const Icon(
+                  Icons.menu,
+                  color: Colors.grey,
+                ),
               ),
               Image(
                 image: AssetImage(Assets.images.logo.path),
@@ -52,12 +107,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
-          techMainScreenPages[selectedIndex],
+          IndexedStack(
+            index: selectedPageIndex,
+            children: [
+              BlogScreen(
+                  size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+              ProfileScreen(
+                  size: size, textTheme: textTheme, bodyMargin: bodyMargin)
+            ],
+          ),
           _BottomNavigation(
             size: size,
             changeScreen: (value) {
               setState(() {
-                selectedIndex = value;
+                selectedPageIndex = value;
               });
             },
           )

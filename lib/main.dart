@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:techblog_danivar/consts/colors.dart';
-import 'package:techblog_danivar/screens/splash_screen.dart';
+import 'package:techblog_danivar/screens/category_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -33,6 +33,12 @@ class MyApp extends StatelessWidget {
         Locale('fa', ''), // Farsi
       ],
       theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: SolidColors.primeryColor,
+            padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 10),
+          ),
+        ),
         inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
@@ -77,7 +83,7 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w700),
         ),
       ),
-      home: const SplashScreen(),
+      home: const CategoryScreen(),
     );
   }
 }
